@@ -9,13 +9,26 @@ MUTATE_PROB = 0.01  # 突然変異確率
 N = 64  # 集合の要素となる最大数の平方根
 TOURNAMENT_SIZE = 30  # トーナメントサイズ
 
-# 0以上1未満の実数Ï乱数
+# 0以上1未満の実数乱数
 RAND_01 = random.random()
 
 class Individual:
-    #コンストラクタ
+    #コンストラクタ(クラスが呼び出されると実行される)
     def __init__(self):
-        chrom = [] #染色体
+        self.chrom = [] #染色体の配列
         for i in range(0,N):
-            chrom[i] = random.randint(0,1)
-        fitness = 0.0 #適応度
+            #0以上1以下の整数を生成
+            x = random.randint(0,1)
+            #生成した整数を染色体の配列に追加
+            self.chrom.append(x)
+
+#適応度を算出
+def evaluate():
+    fitness = 0.0
+    # σ[i=1,N-1]{(chrom[i]*2-1)*(i-1)^1/2}
+    for i in range(0,N):
+        fitness += (Individual.chrom[i] * 2 - 1) * np.sqrt(float(i) + 1)
+    fitness = np.abs(fitness)
+
+    
+
