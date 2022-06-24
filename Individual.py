@@ -30,5 +30,18 @@ def evaluate():
         fitness += (Individual.chrom[i] * 2 - 1) * np.sqrt(float(i) + 1)
     fitness = np.abs(fitness)
 
+#p1とp2から一点交叉で作った子にする
+def crossover1(self):
+    p1 = Individual() #親個体1
+    p2 = Individual() #親個体2
+    chrom = [] #子
+
+    #0以上N-1以下の乱数を交叉点にする
+    point = random.randint(0,N-1)
+    #一点交叉をする
+    for i in range(0,point):
+        chrom[i] = p1.chrom[i]
+    for i in range(point,N):
+        chrom[i] = p2.chrom[i]
     
 
