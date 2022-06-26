@@ -1,24 +1,30 @@
 import Individual
 import gc
 
+
 class Population:
-    
-    #コンストラクタ
+
+    # コンストラクタ
     def __init__(self):
-        self.ind = []
-        self.nextind = []
-        for i in range(0,Individual.POP_SIZE):
-            self.ind[i] = Individual()
-            self.nextind[i] = Individual()
 
-    #デストラクタ
-    def __del__(self):
+        self.ind = []       #現世代個体群
+        self.nextind = []   #次世代個体群
 
-        self.ind = ind
-        self.nextind = nextind
+        for i in range(0, Individual.POP_SIZE):
 
-        for i in range(0,Individual.POP_SIZE):
-            del self.ind[i]
-            del self.nextind[i]
-        #メモリを解放
+            #現世代個体群を生成
+            self.x = Individual.Individual()
+            self.ind.append(self.x.chrom)
+
+            #次世代個体群を生成
+            self.y = Individual.Individual()
+            self.nextind.append(self.y.chrom)
+
+    # デストラクタ
+    def __del__(ind,nextind):
+
+        for i in range(0, Individual.POP_SIZE):
+            del ind[i]
+            del nextind[i]
+        # メモリを解放
         gc.collect()
