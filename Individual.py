@@ -29,16 +29,16 @@ class Individual:
 
 
     #適応度を算出
-    def evaluate():
-
-        fitness = 0.0
+    def evaluate(ind):
 
         # 適応度関数 σ[i=1,N-1]{(chrom[i]*2-1)*(i-1)^1/2}
         for i in range(0,N):
-            fitness += (Individual.chrom[i] * 2 - 1) * np.sqrt(float(i) + 1)
+            ind.fitness += (ind.chrom[i] * 2 - 1) * np.sqrt(float(i) + 1)
 
         #absで絶対値を求める
-        fitness = np.abs(fitness)
+        ind.fitness = np.abs(ind.fitness)
+
+        return ind
 
 
     #p1とp2から一点交叉で作った子にする
