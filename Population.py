@@ -55,3 +55,20 @@ class Population:
                 j += 1
             if i <= j:
                 break
+
+    # 世代交代をする
+    def alternate(self):
+        for i in range(Individual.ELITE):
+            for j in range(Individual.N):
+                Individual.nextInd[i].chrom[j] = Individual.ind[i].chrom[j]
+
+        for i in range(Individual.POP_SIZE):
+            p1 = Population.rankingSelect1()
+            p2 = Population.rankingSelect2()
+
+        for i in range(Individual.POP_SIZE):
+            Individual.nextInd[i] = Individual.mutate()
+
+        Individual.ind,Individual.nextInd = Individual.nextInd,Individual.ind
+
+        Population.evaluete()
