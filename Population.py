@@ -29,7 +29,29 @@ class Population:
         # メモリを解放
         gc.collect()
 
+    #全ての個体を評価して，適応度順に並び変える
     def evaluete(self):
         for i in range(0, Individual.POP_SIZE):
             self.ind[i].fitness = Individual.evaluate(self.ind[i])
-        sort(0, Individual.POP_SIZE - 1)
+        Population.sort(0, Individual.POP_SIZE - 1)
+
+    # ind[lb]~ind[ub]をクイックソートで並び替える
+    # lb: 並びかえの対象要素の添字の下限
+    # ub: 並びかえの対象要素の添字の上限
+    def sort(ind,lb,ub):
+        if (lb + ub) / 2:
+            k = (lb + ub) / 2
+            pivot = ind[k].fitness
+            i = lb
+            j = ub
+        while True:
+            while ind[i].fitness < pivot:
+                i += 1
+            while ind[j].fitness > pivot:
+                j -= 1
+            if i <= j:
+                ind[i],ind[j] = ind[j],ind[i]
+                i += 1
+                j += 1
+            if i <= j:
+                break
